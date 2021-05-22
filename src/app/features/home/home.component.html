@@ -28,14 +28,10 @@
 					</ion-button>
 				</ion-col>
 
-				<ion-col size="2">{{ cart[item.id] || 0 }}</ion-col>
+				<ion-col *ngIf="cart" size="2">{{ cart[item.id] || 0 }}</ion-col>
 
 				<ion-col size="5">
-					<ion-button
-						(click)="removeToCart($event, item)"
-						[disabled]="!cart[item.id] || cart[item.id] === 0"
-						fill="clear"
-					>
+					<ion-button (click)="removeToCart($event, item)" fill="clear">
 						<ion-icon slot="icon-only" name="remove"></ion-icon>
 					</ion-button>
 				</ion-col>

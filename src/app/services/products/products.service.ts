@@ -59,7 +59,6 @@ export class ProductsService {
 			const fbDocument = await this._firestore.collection("carts").add({
 				lastUpdate: firebase.firestore.FieldValue.serverTimestamp()
 			})
-			console.log("fbDocument: ", fbDocument)
 			this.cartKey = fbDocument.id
 			await this.storage.set(CART_STORAGE_KEY, this.cartKey)
 		}
@@ -94,7 +93,12 @@ export class ProductsService {
 	}
 
 	async checkoutCart() {
-		await this._firestore.collection("orders").add(this.cart.value)
+		console.log("this.cart.value: ", this.cart.value)
+		await this._firestore
+			.collection("orders")
+			.add(this.cart.value[0])
+			.then((res) => res)
+			.catch((error) => console.log("Error: ", error))
 
 		this._firestore.collection("carts").doc(this.cartKey).set({
 			lastUpdate: firebase.firestore.FieldValue.serverTimestamp()

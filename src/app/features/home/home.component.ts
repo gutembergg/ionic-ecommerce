@@ -33,7 +33,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
 	ngOnInit(): void {
 		this.products$ = this._productsService.getProducts()
 		this._productsService.cart.subscribe((response) => {
-			console.log("My Cart: ", response)
 			this.cart = response[0]
 		})
 	}
